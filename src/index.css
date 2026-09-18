@@ -1,0 +1,346 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-ivory text-charcoal font-body antialiased;
+  overflow-x: hidden;
+}
+
+/* Elegant thin gold scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #faf6ee;
+}
+::-webkit-scrollbar-thumb {
+  background: #c9a24a;
+  border-radius: 999px;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.9s ease, transform 0.9s ease;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Modal animations */
+@keyframes modalBackdropIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes modalPanelIn {
+  from {
+    opacity: 0;
+    transform: translateY(28px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+.modal-backdrop {
+  animation: modalBackdropIn 0.3s ease both;
+}
+.modal-panel {
+  animation: modalPanelIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Lightbox photo zoom */
+@keyframes lightboxZoom {
+  from {
+    opacity: 0;
+    transform: scale(1.04);
+    filter: blur(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0);
+  }
+}
+.lightbox-zoom {
+  animation: lightboxZoom 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* ─── Flying butterflies ─────────────────────────────── */
+.butterfly {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 30;
+  will-change: transform;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+.butterfly svg {
+  display: block;
+  animation: butterflyBob 2.8s ease-in-out infinite;
+  filter: drop-shadow(0 2px 5px rgba(140, 105, 45, 0.4));
+}
+.butterfly .wing-left {
+  transform-box: view-box;
+  transform-origin: 24px 16px;
+  animation: wingFlapL 0.38s ease-in-out infinite;
+}
+.butterfly .wing-right {
+  transform-box: view-box;
+  transform-origin: 24px 16px;
+  animation: wingFlapR 0.38s ease-in-out infinite;
+}
+@keyframes wingFlapL {
+  0%,
+  100% {
+    transform: scaleX(1);
+  }
+  50% {
+    transform: scaleX(-0.12);
+  }
+}
+@keyframes wingFlapR {
+  0%,
+  100% {
+    transform: scaleX(-0.12);
+  }
+  50% {
+    transform: scaleX(1);
+  }
+}
+@keyframes butterflyBob {
+  0%,
+  100% {
+    transform: rotate(-4deg) translateY(0);
+  }
+  50% {
+    transform: rotate(4deg) translateY(-8px);
+  }
+}
+
+@keyframes flyA {
+  0% {
+    transform: translate(-8vw, 12vh) rotate(-8deg);
+  }
+  20% {
+    transform: translate(12vw, 20vh) rotate(12deg);
+  }
+  45% {
+    transform: translate(40vw, 6vh) rotate(-14deg);
+  }
+  70% {
+    transform: translate(68vw, 18vh) rotate(10deg);
+  }
+  100% {
+    transform: translate(108vw, 10vh) rotate(-8deg);
+  }
+}
+@keyframes flyB {
+  0% {
+    transform: translate(-10vw, 80vh) rotate(10deg);
+  }
+  30% {
+    transform: translate(25vw, 50vh) rotate(-12deg);
+  }
+  60% {
+    transform: translate(60vw, 76vh) rotate(8deg);
+  }
+  100% {
+    transform: translate(108vw, 60vh) rotate(-10deg);
+  }
+}
+@keyframes flyC {
+  0% {
+    transform: translate(110vw, 30vh) rotate(6deg);
+  }
+  35% {
+    transform: translate(70vw, 10vh) rotate(-15deg);
+  }
+  70% {
+    transform: translate(30vw, 28vh) rotate(12deg);
+  }
+  100% {
+    transform: translate(-10vw, 44vh) rotate(-6deg);
+  }
+}
+@keyframes flyD {
+  0% {
+    transform: translate(110vw, 64vh) rotate(-6deg);
+  }
+  25% {
+    transform: translate(75vw, 80vh) rotate(14deg);
+  }
+  55% {
+    transform: translate(45vw, 40vh) rotate(-12deg);
+  }
+  100% {
+    transform: translate(-10vw, 18vh) rotate(8deg);
+  }
+}
+.fly-a {
+  animation-name: flyA;
+}
+.fly-b {
+  animation-name: flyB;
+}
+.fly-c {
+  animation-name: flyC;
+}
+.fly-d {
+  animation-name: flyD;
+}
+
+.text-shimmer {
+  background: linear-gradient(90deg, #ad8639 0%, #f1e0b3 25%, #c9a24a 50%, #f1e0b3 75%, #ad8639 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shimmer 3.5s linear infinite;
+}
+
+/* Countdown digits pop softly each tick */
+@keyframes tickPop {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.14); }
+  100% { transform: scale(1); }
+}
+.tick-pop {
+  animation: tickPop 0.4s ease-out;
+  transform-origin: center;
+}
+
+/* Beating heart accent */
+@keyframes heartBeat {
+  0%, 100% { transform: scale(1); }
+  25%      { transform: scale(1.2); }
+  40%      { transform: scale(1); }
+  60%      { transform: scale(1.2); }
+}
+.heart-beat {
+  animation: heartBeat 1.4s ease-in-out infinite;
+  transform-origin: center;
+}
+
+/* Gentle bobbing float for the hero arch */
+@keyframes floatSlow {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-12px); }
+}
+.float-slow {
+  animation: floatSlow 7s ease-in-out infinite;
+}
+
+/* Soft idle float for detail cards */
+@keyframes floatSoft {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-7px); }
+}
+.float-soft {
+  animation: floatSoft 6s ease-in-out infinite;
+}
+
+/* Animated gold shimmer sweep across a card's top edge */
+@keyframes shineTop {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+.shine-top {
+  background: linear-gradient(90deg, #ad8639 0%, #f1e0b3 25%, #c9a24a 50%, #f1e0b3 75%, #ad8639 100%);
+  background-size: 200% auto;
+  animation: shineTop 4s linear infinite;
+}
+
+.gold-divider {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+}
+.gold-divider::before,
+.gold-divider::after {
+  content: '';
+  height: 1px;
+  width: 3rem;
+  background: linear-gradient(90deg, transparent, #c9a24a);
+}
+.gold-divider::after {
+  background: linear-gradient(90deg, #c9a24a, transparent);
+}
+
+.frame-corner {
+  position: absolute;
+  width: 3.5rem;
+  height: 3.5rem;
+  border: 1.5px solid #c9a24a;
+  opacity: 0.85;
+}
+
+/* Envelope preloader */
+.envelope {
+  position: relative;
+  width: 220px;
+  height: 150px;
+}
+.envelope-back {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #f9f1dc, #e6cb85);
+  border-radius: 4px;
+  box-shadow: 0 20px 60px rgba(140, 105, 45, 0.35);
+}
+.envelope-flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #e6cb85, #c9a24a);
+  clip-path: polygon(0 0, 50% 55%, 100% 0);
+  transform-origin: top;
+  animation: flapOpen 0.9s ease-in-out 0.4s forwards;
+  border-radius: 4px 4px 0 0;
+}
+@keyframes flapOpen {
+  to {
+    transform: rotateX(180deg);
+  }
+}
+.envelope-seal {
+  position: absolute;
+  top: 42%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #e6cb85, #8c692d 75%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fffdf8;
+  font-family: 'Alex Brush', cursive;
+  font-size: 1.35rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+  z-index: 20;
+  animation: sealFade 0.5s ease-in 0.5s forwards;
+}
+@keyframes sealFade {
+  to {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.6);
+  }
+}

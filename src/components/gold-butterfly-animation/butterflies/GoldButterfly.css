@@ -1,0 +1,161 @@
+/* ============================================================
+   Gold Butterfly — wing flutter + flight-path animation styles
+   ============================================================ */
+
+.gold-butterfly {
+  overflow: visible;
+  display: block;
+  filter: drop-shadow(0 1px 2px rgba(153, 93, 22, 0.18));
+}
+
+/* Each wing pivots from its own attachment edge (fill-box makes
+   this work regardless of the SVG's outer viewBox/translate math) */
+.gb-wing {
+  transform-box: fill-box;
+  transform-origin: 0% 50%;
+  animation: gb-flap 0.5s ease-in-out infinite;
+}
+
+/* Slightly offset the left wing's timing on some variants gives a
+   less robotic, more organic flutter — comment out if you prefer
+   perfectly mirrored wings. */
+.gb-wing-left {
+  animation-duration: 0.5s;
+}
+
+@keyframes gb-flap {
+  0%, 100% {
+    transform: scaleX(1) scaleY(1);
+  }
+  50% {
+    transform: scaleX(0.55) scaleY(0.96);
+  }
+}
+
+/* ------------------------------------------------------------
+   Flight wrapper — put this class on the DIV that positions the
+   <GoldButterfly /> absolutely inside your gallery/preview area.
+
+   Four path variants now sweep the FULL VIEWPORT (vw/vh units)
+   so butterflies fly right across the whole screen instead of
+   hovering in one spot. Paths 1-2 travel LEFT → RIGHT and paths
+   3-4 travel RIGHT → LEFT, so the swarm covers BOTH sides of
+   the screen. Each path fades in/out at the edges (clipped by
+   the parent's overflow) so they glide in smoothly.
+   ------------------------------------------------------------ */
+.gb-fly {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  will-change: transform;
+  opacity: 0;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+.gb-fly-1 {
+  animation: gb-path-1 14s ease-in-out infinite;
+}
+.gb-fly-2 {
+  animation: gb-path-2 17s ease-in-out infinite;
+}
+.gb-fly-3 {
+  animation: gb-path-3 15s ease-in-out infinite;
+}
+.gb-fly-4 {
+  animation: gb-path-4 19s ease-in-out infinite;
+}
+
+/* Left → right, upper half of screen */
+@keyframes gb-path-1 {
+  0%   { opacity: 0; transform: translate(-18vw, 12vh) rotate(-10deg); }
+  5%   { opacity: 1; }
+  25%  { transform: translate(20vw, 28vh) rotate(10deg); }
+  50%  { transform: translate(52vw, 14vh) rotate(-8deg); }
+  75%  { transform: translate(84vw, 36vh) rotate(8deg); }
+  95%  { opacity: 1; }
+  100% { opacity: 0; transform: translate(118vw, 18vh) rotate(-10deg); }
+}
+
+/* Left → right, lower half of screen */
+@keyframes gb-path-2 {
+  0%   { opacity: 0; transform: translate(-18vw, 70vh) rotate(8deg); }
+  5%   { opacity: 1; }
+  30%  { transform: translate(24vw, 52vh) rotate(-8deg); }
+  60%  { transform: translate(58vw, 76vh) rotate(10deg); }
+  95%  { opacity: 1; }
+  100% { opacity: 0; transform: translate(118vw, 62vh) rotate(-6deg); }
+}
+
+/* Right → left, middle of screen */
+@keyframes gb-path-3 {
+  0%   { opacity: 0; transform: translate(118vw, 42vh) rotate(8deg); }
+  5%   { opacity: 1; }
+  30%  { transform: translate(80vw, 22vh) rotate(-10deg); }
+  60%  { transform: translate(46vw, 52vh) rotate(8deg); }
+  95%  { opacity: 1; }
+  100% { opacity: 0; transform: translate(-18vw, 30vh) rotate(-8deg); }
+}
+
+/* Right → left, upper half of screen */
+@keyframes gb-path-4 {
+  0%   { opacity: 0; transform: translate(118vw, 20vh) rotate(-8deg); }
+  5%   { opacity: 1; }
+  35%  { transform: translate(76vw, 42vh) rotate(10deg); }
+  70%  { transform: translate(38vw, 18vh) rotate(-6deg); }
+  95%  { opacity: 1; }
+  100% { opacity: 0; transform: translate(-18vw, 40vh) rotate(8deg); }
+}
+
+/* ------------------------------------------------------------
+   Reference-style ink: identical butterfly design, just a softer
+   translucent gold wash instead of the solid gradient.
+   ------------------------------------------------------------ */
+.gb-reference-fly .gold-butterfly {
+  opacity: 0.9;
+}
+
+.gb-reference-butterfly path {
+  fill: rgba(246, 205, 120, 0.14);
+  stroke: #d59a39;
+  stroke-width: 1.1;
+}
+
+.gb-reference-butterfly g[stroke] {
+  stroke: #d59a39;
+  stroke-width: 0.8;
+  opacity: 0.9;
+}
+
+.gb-reference-butterfly circle {
+  fill: #e1a642;
+}
+
+/* ------------------------------------------------------------
+   Twinkling gold sparkle stars, like the little accent stars in
+   the reference image.
+   ------------------------------------------------------------ */
+.gb-star {
+  position: absolute;
+  color: #e0a63c;
+  pointer-events: none;
+  animation: gb-twinkle 2.4s ease-in-out infinite;
+}
+
+@keyframes gb-twinkle {
+  0%, 100% { opacity: 0.2; transform: scale(0.7) rotate(0deg); }
+  50%      { opacity: 1;   transform: scale(1.1) rotate(15deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gb-fly,
+  .gold-butterfly,
+  .gb-star,
+  .gb-wing {
+    animation: none !important;
+  }
+  .gb-fly {
+    opacity: 1;
+  }
+}
