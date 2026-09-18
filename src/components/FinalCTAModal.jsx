@@ -4,6 +4,7 @@ import { CalendarHeart, Heart, ArrowRight } from 'lucide-react'
 import CoupleIllustration from './final-cta-animation/CoupleIllustration'
 import FloatingHearts from './final-cta-animation/FloatingHearts'
 import GoldSparkle from './gold-butterfly-animation/butterflies/GoldSparkle'
+import FlyingButterflies from './gold-butterfly-animation/butterflies/FlyingButterflies'
 import './gold-butterfly-animation/butterflies/GoldButterfly.css'
 import './FinalCTAModal.css'
 import weddingData from '../data/weddingData'
@@ -54,6 +55,15 @@ export default function FinalCTAModal({ open, onClose, onRSVP }) {
                    rounded-full bg-[radial-gradient(circle,rgba(212,175,55,0.22),transparent_70%)]"
         aria-hidden="true"
       />
+
+      {/* full-screen ambient layer: a few gold butterflies + drifting hearts */}
+      <div
+        className="pointer-events-none absolute inset-0 z-[30] overflow-hidden"
+        aria-hidden="true"
+      >
+        <FlyingButterflies count={4} starCount={0} layout="random" />
+        <FloatingHearts count={14} fullScreen />
+      </div>
 
       <div
         className="relative w-full max-w-lg text-center

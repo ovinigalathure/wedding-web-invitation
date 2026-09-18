@@ -16,3 +16,25 @@
   85%  { opacity: 0.4; }
   100% { opacity: 0; transform: translateY(-140px) scale(1); }
 }
+
+/* Full-screen variant: rises from the bottom edge all the way to the top
+   of the viewport, swaying gently side to side as it floats up. */
+.floating-heart--full {
+  bottom: auto;
+  top: 100%;
+  animation-name: heartRiseFull;
+  will-change: transform, opacity;
+}
+
+@keyframes heartRiseFull {
+  0%   { opacity: 0; transform: translateY(0) translateX(0) scale(0.6); }
+  10%  { opacity: 0.85; }
+  50%  { opacity: 0.5; transform: translateY(-50vh) translateX(16px) scale(1); }
+  90%  { opacity: 0.25; }
+  100% { opacity: 0; transform: translateY(-100vh) translateX(-12px) scale(1.1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .floating-heart,
+  .floating-heart--full { animation: none; opacity: 0; }
+}
