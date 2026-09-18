@@ -119,7 +119,7 @@ export default function FinalCTAModal({ open, onClose, onRSVP }) {
         </div>
 
         {/* inner content */}
-        <div className="relative flex flex-col items-center px-7 pb-7 pt-12 sm:px-10">
+        <div className="relative flex flex-col items-center px-7 pb-6 pt-11 sm:px-10">
           {/* golden halo + floating couple illustration */}
           <div className="final-rise relative mb-1" style={{ animationDelay: '120ms' }}>
             <div
@@ -127,7 +127,7 @@ export default function FinalCTAModal({ open, onClose, onRSVP }) {
                          bg-[radial-gradient(circle_at_50%_35%,rgba(212,175,55,0.28),transparent_70%)]"
               aria-hidden="true"
             />
-            <CoupleIllustration className="mx-auto w-40 sm:w-44" />
+            <CoupleIllustration className="mx-auto w-36 sm:w-40" />
           </div>
 
           <div
@@ -160,7 +160,7 @@ export default function FinalCTAModal({ open, onClose, onRSVP }) {
           </p>
 
           <div
-            className="final-rise mt-5 inline-flex items-center gap-2 rounded-full border border-[#d4af37]/40
+            className="final-rise mt-4 inline-flex items-center gap-2 rounded-full border border-[#d4af37]/40
                        bg-white/60 px-4 py-1.5 text-sm text-[#8c692d] shadow-sm backdrop-blur-sm"
             style={{ animationDelay: '520ms' }}
           >
@@ -170,13 +170,13 @@ export default function FinalCTAModal({ open, onClose, onRSVP }) {
             {weddingData.weddingDayLabel}
           </div>
 
-          <div className="final-rise final-divider mt-5 w-full max-w-[250px]" style={{ animationDelay: '560ms' }}>
+          <div className="final-rise final-divider mt-4 w-full max-w-[250px]" style={{ animationDelay: '560ms' }}>
             <span className="final-gem" aria-hidden="true" />
           </div>
 
           <button
             onClick={onRSVP}
-            className="final-rise final-sheen group mt-5 inline-flex items-center gap-2.5 rounded-full
+            className="final-rise final-sheen group mt-4 inline-flex items-center gap-2.5 rounded-full
                        bg-gradient-to-r from-[#d4af37] via-[#e0c069] to-[#b8860b] px-9 py-3.5
                        font-body text-lg font-semibold tracking-wide text-[#3f2f10]
                        shadow-[0_12px_26px_-8px_rgba(168,121,42,0.7)] transition-transform duration-300
