@@ -9,6 +9,7 @@ import Gallery from './components/Gallery'
 import RSVP from './components/RSVP'
 import Footer from './components/Footer'
 import FinalCTAModal from './components/FinalCTAModal'
+import MusicToggle from './components/MusicToggle'
 import { useScrollEnd } from './hooks/useScrollEnd'
 
 export default function App() {
@@ -49,6 +50,7 @@ export default function App() {
         onClose={() => setShowFinalCTA(false)}
         onRSVP={scrollToRSVP}
       />
+      <MusicToggle entered={entered} />
     </div>
   )
 }

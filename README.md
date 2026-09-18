@@ -4,7 +4,7 @@ A modern, responsive gold & ivory digital wedding invitation built with **React*
 
 ## ✨ Features
 
-- **Animated envelope "opening" preloader** with a wax-seal monogram
+- **Animated envelope "opening" preloader** with a wax-seal monogram — tap **"Open Invitation"** to enter the home page, which also starts the background music
 - **Golden Arch hero** — float-animated arch portrait, orbiting halo rings, shimmer-script names, monogram seal, editorial side note
 - **Love-letter Our Story** — tilted polaroids held by washi tape, a script "Dear everyone" letter with drop cap, and a beating-heart wax seal
 - **Live Countdown** — circular conic-gradient dials that deplete as the hour approaches, shimmer digits that pop on every tick, beating-heart divider
@@ -12,6 +12,7 @@ A modern, responsive gold & ivory digital wedding invitation built with **React*
 - **Photo Gallery** — lightbox with prev/next/keyboard controls and **flying gold butterflies + sparkles** that sweep the screen on both sides (pure SVG + CSS, click-through)
 - **Modern RSVP** — invitation card beside a form with accept/decline toggles, guest stepper, and a personalized success state
 - **End-of-Page RSVP Reminder** — when a visitor scrolls to the very bottom of the site, a golden animated popup appears with a floating line-art couple illustration, drifting hearts and sparkles, and a warm closing message — with a one-tap button that scrolls back up to the RSVP form. Fires once per visit. Fully configurable via `finalReminder` in `src/data/weddingData.js`.
+- **Background music** — soft, calm wedding tune that starts as the falling heart auto-opens the invitation into the home page and loops across the whole site; a small gold floating toggle plays or pauses. Preference remembered via `localStorage`, volume kept low. Audio file: `src/Assests/tunetank-romantic-wedding-love-music-412708.mp3`. (Browsers block audible autoplay on a brand-new visit until the first touch, so the very first visit may unlock on the first tap; every later visit starts instantly.)
 - **Scrapbook-style footer** with quick links, save-the-date badge, contact, and back-to-top
 - Elegant white & gold theme: shimmering gold text + serif/script fonts (Playfair Display, Cormorant Garamond, Alex Brush)
 - Scroll-reveal animations (plain IntersectionObserver, no animation library)
