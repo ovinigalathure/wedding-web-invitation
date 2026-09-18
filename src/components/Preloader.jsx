@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { ArrowRight, Heart } from 'lucide-react'
 import GoldSparkle from './gold-butterfly-animation/butterflies/GoldSparkle'
 import './gold-butterfly-animation/butterflies/GoldButterfly.css'
@@ -8,11 +8,66 @@ import weddingData from '../data/weddingData'
 export default function Preloader({ onEnter }) {
   const [ready, setReady] = useState(false)
   const [hide, setHide] = useState(false)
+  const [sent, setSent] = useState(false)
+  const [fallHit, setFallHit] = useState(false)
+
+  const envRef = useRef(null)
+  const btnRef = useRef(null)
+  const heartRef = useRef(null)
+  const enteredRef = useRef(false)
 
   useEffect(() => {
-    const t = setTimeout(() => setReady(true), 2100)
+    const t = setTimeout(() => setReady(true), 1600)
     return () => clearTimeout(t)
   }, [])
+
+  // once the letter has risen, drop a gold heart from the envelope
+  // onto the Open Invitation button, then enter the site
+  useEffect(() => {
+    if (!ready) return
+    const t = setTimeout(startFall, 300)
+    return () => clearTimeout(t)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ready])
+
+  const startFall = () => {
+    if (enteredRef.current) return
+    const heart = heartRef.current
+    const env = envRef.current
+    const btn = btnRef.current
+    if (!heart || !env || !btn) return
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+
+    const s = env.getBoundingClientRect()
+    const b = btn.getBoundingClientRect()
+    const sx = s.left + s.width / 2
+    const sy = s.top + s.height / 2
+    const tx = b.left + b.width / 2
+    const ty = b.top + b.height / 2
+
+    heart.style.transform = `translate3d(${sx}px, ${sy}px, 0) translate(-50%, -50%)`
+    setSent(true)
+
+    // commit the start position (no transform transition yet),
+    // then enable the transition and only then set the target
+    requestAnimationFrame(() => {
+      void heart.offsetWidth
+      heart.classList.add('is-falling')
+      requestAnimationFrame(() => {
+        heart.style.transform = `translate3d(${tx}px, ${ty}px, 0) translate(-50%, -50%)`
+      })
+    })
+
+    window.setTimeout(() => setFallHit(true), 350)
+    window.setTimeout(() => handleEnter(), 600)
+  }
+
+  const handleEnter = () => {
+    if (enteredRef.current) return
+    enteredRef.current = true
+    setHide(true)
+    setTimeout(onEnter, 700)
+  }
 
   const sparkles = useMemo(
     () =>
@@ -38,11 +93,6 @@ export default function Preloader({ onEnter }) {
     []
   )
 
-  const handleEnter = () => {
-    setHide(true)
-    setTimeout(onEnter, 700)
-  }
-
   return (
     <div
       className={`inv-stage ${ready ? 'is-ready' : ''} ${hide ? 'is-exiting' : ''}`}
@@ -50,7 +100,12 @@ export default function Preloader({ onEnter }) {
       aria-label={`${weddingData.bride} & ${weddingData.groom} wedding invitation`}
       aria-modal="true"
     >
-      {/* ambient gold auroras + corner frames */}
+      {/* the heart that falls from the opened letter onto the button */}
+      <span ref={heartRef} className="inv-falling-heart" aria-hidden="true">
+        <Heart size={40} fill="currentColor" />
+      </span>
+
+      {/* ambient gold sheens + corner frames */}
       <div className="inv-aurora inv-aurora-a" aria-hidden="true" />
       <div className="inv-aurora inv-aurora-b" aria-hidden="true" />
       <span className="inv-corner inv-corner-tl" aria-hidden="true" />
@@ -91,12 +146,12 @@ export default function Preloader({ onEnter }) {
 
         <div className="inv-scene my-7">
           <div className="inv-glow" aria-hidden="true" />
-          <div className="inv-env">
+          <div className="inv-env" ref={envRef}>
             <div className="inv-env-back" />
             <div className="inv-letter">
               <span className="inv-letter-seq" aria-hidden="true" />
               <span className="inv-letter-monogram">{weddingData.monogram.replace(' & ', '&')}</span>
-              <Heart size={18} className="inv-letter-heart" fill="currentColor" />
+              <Heart size={18} className={`inv-letter-heart ${sent ? 'is-sent' : ''}`} fill="currentColor" />
             </div>
             <div className="inv-pocket" />
             <div className="inv-flap" />
@@ -116,7 +171,11 @@ export default function Preloader({ onEnter }) {
         </div>
 
         <div className="inv-actions">
-          <button onClick={handleEnter} className="inv-btn">
+          <button
+            ref={btnRef}
+            onClick={handleEnter}
+            className={`inv-btn ${fallHit ? 'is-hit' : ''}`}
+          >
             Open Invitation
             <ArrowRight size={16} />
           </button>
