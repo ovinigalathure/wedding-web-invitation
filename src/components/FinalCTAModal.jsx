@@ -66,7 +66,7 @@ export default function FinalCTAModal({ open, onClose, onRSVP }) {
       </div>
 
       <div
-        className="relative w-full max-w-lg text-center
+        className="relative w-full max-w-lg text-center max-h-[85vh] overflow-hidden
                    rounded-[2.2rem] border border-[#d4af37]/45
                    bg-[linear-gradient(165deg,#fffdf6_0%,#fbf1de_45%,#f6e6cb_100%)]
                    shadow-[0_30px_80px_-20px_rgba(120,90,40,0.55)] animate-popIn"
@@ -119,7 +119,7 @@ export default function FinalCTAModal({ open, onClose, onRSVP }) {
         </div>
 
         {/* inner content */}
-        <div className="relative flex flex-col items-center px-7 pb-7 pt-12 sm:px-10">
+        <div className="relative flex flex-col items-center px-7 pb-6 pt-11 sm:px-10 overflow-y-auto max-h-[80vh]">
           {/* golden halo + floating couple illustration */}
           <div className="final-rise relative mb-1" style={{ animationDelay: '120ms' }}>
             <div
@@ -127,7 +127,7 @@ export default function FinalCTAModal({ open, onClose, onRSVP }) {
                          bg-[radial-gradient(circle_at_50%_35%,rgba(212,175,55,0.28),transparent_70%)]"
               aria-hidden="true"
             />
-            <CoupleIllustration className="mx-auto w-40 sm:w-44" />
+            <CoupleIllustration className="mx-auto w-32 sm:w-36" />
           </div>
 
           <div
@@ -142,7 +142,7 @@ export default function FinalCTAModal({ open, onClose, onRSVP }) {
 
           <h3
             id="final-cta-heading"
-            className="final-rise mt-3 font-heading text-3xl leading-tight text-[#6b4f1d] sm:text-4xl"
+            className="final-rise mt-3 font-heading text-2xl leading-tight text-[#6b4f1d] sm:text-3xl"
             style={{ animationDelay: '280ms' }}
           >
             {heading}
