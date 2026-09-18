@@ -1,17 +1,37 @@
 # Emma & James — Wedding Invitation Website
 
-A modern, responsive, white & gold digital wedding invitation built with **React**, **Vite**, and **Tailwind CSS**. Inspired by the elegant scrolling single-page invitation format (opening envelope, countdown, event details, guest guide, RSVP, gift registry).
+A modern, responsive gold & ivory digital wedding invitation built with **React**, **Vite**, and **Tailwind CSS** — an elegant scrolling single-page invite with a rising-envelope preloader, live countdown, gold butterfly animated photo lightbox, and an RSVP card.
 
 ## ✨ Features
 
-- Animated envelope "opening" preloader with wax seal
-- Elegant white & gold theme with shimmering gold text, serif + script fonts (Playfair Display, Cormorant Garamond, Alex Brush)
-- Fully responsive (mobile-first, looks great on phones — just like the reference video — and scales up beautifully on tablet/desktop)
-- Sections: Hero, Our Story, Live Countdown, Ceremony & Reception Details, Dress Code, Photo Gallery, Guest Guide (etiquette), RSVP form, Gift Registry, Footer
-- Scroll-reveal animations (no external animation library — plain IntersectionObserver)
+- **Animated envelope "opening" preloader** with a wax-seal monogram
+- **Golden Arch hero** — float-animated arch portrait, orbiting halo rings, shimmer-script names, monogram seal, editorial side note
+- **Love-letter Our Story** — tilted polaroids held by washi tape, a script "Dear everyone" letter with drop cap, and a beating-heart wax seal
+- **Live Countdown** — circular conic-gradient dials that deplete as the hour approaches, shimmer digits that pop on every tick, beating-heart divider
+- **Wedding Details** — three floating cards (Date & Time, Location, Poruwa Ceremony) with orbiting icon rings and shimmer top edges; each opens a detailed modal
+- **Photo Gallery** — lightbox with prev/next/keyboard controls and **flying gold butterflies + sparkles** that sweep the screen on both sides (pure SVG + CSS, click-through)
+- **Modern RSVP** — invitation card beside a form with accept/decline toggles, guest stepper, and a personalized success state
+- **End-of-Page RSVP Reminder** — when a visitor scrolls to the very bottom of the site, a golden animated popup appears with a floating line-art couple illustration, drifting hearts and sparkles, and a warm closing message — with a one-tap button that scrolls back up to the RSVP form. Fires once per visit. Fully configurable via `finalReminder` in `src/data/weddingData.js`.
+- **Scrapbook-style footer** with quick links, save-the-date badge, contact, and back-to-top
+- Elegant white & gold theme: shimmering gold text + serif/script fonts (Playfair Display, Cormorant Garamond, Alex Brush)
+- Scroll-reveal animations (plain IntersectionObserver, no animation library)
 - Sticky floating navigation bar
 - All content centralized in one config file for easy editing
-- Stock photography from Unsplash (free license) — swap in your own photos any time
+- Free-license Unsplash stock photos — swap in your own any time
+
+## 🦋 Gold Butterfly Animation
+
+The fluttering butterfly animations used in the gallery preview live in:
+
+```
+src/components/gold-butterfly-animation/
+```
+
+- `butterflies/GoldButterfly.jsx` + `.css` — ornate gold butterfly (gradient wings, eyespot, wing-flap + full-viewport flight paths)
+- `butterflies/GoldSparkle.jsx` — twinkling star accents
+- `butterflies/FlyingButterflies.jsx` — swarm overlay (props: `count`, `starCount`, `layout`)
+
+It's wired into the gallery lightbox in `src/components/Gallery.jsx`.
 
 ## 🛠 Getting Started
 
@@ -28,7 +48,7 @@ To build a production-ready static site:
 npm run build
 ```
 
-The output will be in the `dist/` folder — you can deploy it to Netlify, Vercel, GitHub Pages, or any static host.
+The output will be in the `dist/` folder — deploy to Netlify, Vercel, GitHub Pages, or any static host.
 
 ## ✏️ How to Customize
 
@@ -39,14 +59,14 @@ src/data/weddingData.js
 ```
 
 Edit that file to change:
+
 - Bride & groom names, monogram, quote
-- Wedding date (the countdown updates automatically)
-- Ceremony & reception venue, address, time
-- Dress code
-- Guest guide / etiquette items
-- Gift/bank details
-- Contact info
-- Photos (swap the Unsplash URLs for your own — just drop your images into `public/` or link to your own hosted photos)
+- Wedding date & day label (the countdown updates automatically) — keep the ISO format in `weddingDateISO`
+- Ceremony & reception venue, address, time, maps links
+- Poruwa ceremony text and the "lantern of wishes" idea
+- RSVP deadline and contact info
+- The guest guide is currently unused (section removed) — you can re-add `<GuestGuide />` in `src/App.jsx`
+- Photos (swap the Unsplash URLs for your own hosted photos)
 
 ## 🖼 Replacing the Photos
 
@@ -54,6 +74,7 @@ The demo uses free-license Unsplash photos as placeholders. To use your own:
 
 1. Add your images to the `public/images/` folder (create it if needed).
 2. Update the `images` object in `src/data/weddingData.js`, e.g.:
+
    ```js
    images: {
      hero: '/images/hero.jpg',
@@ -76,7 +97,7 @@ Just update the `handleSubmit` function in `src/components/RSVP.jsx`.
 ## 📦 Tech Stack
 
 - React 18
-- Vite 5
+- Vite 7
 - Tailwind CSS 3
 - lucide-react (icons)
 

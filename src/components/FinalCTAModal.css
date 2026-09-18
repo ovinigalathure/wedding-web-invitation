@@ -1,0 +1,85 @@
+/* src/components/FinalCTAModal.css */
+
+/* Breathing halo around the wax-seal monogram */
+.final-seal::before {
+  content: '';
+  position: absolute;
+  inset: -7px;
+  border-radius: 9999px;
+  border: 1px solid rgba(212, 175, 55, 0.55);
+  animation: finalSealBreath 2.6s ease-in-out infinite;
+}
+@keyframes finalSealBreath {
+  0%, 100% { transform: scale(1); opacity: 0.9; }
+  50%      { transform: scale(1.1); opacity: 0.3; }
+}
+
+/* Light sweep racing across the RSVP button */
+.final-sheen {
+  position: relative;
+  overflow: hidden;
+}
+.final-sheen::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(115deg, transparent 32%, rgba(255, 255, 255, 0.55) 50%, transparent 68%);
+  transform: translateX(-130%);
+  animation: finalSheen 3.2s ease-in-out infinite;
+}
+@keyframes finalSheen {
+  0%, 55% { transform: translateX(-130%); }
+  100%    { transform: translateX(130%); }
+}
+
+/* Gilded corner flourishes on the card frame */
+.final-corner {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  opacity: 0.85;
+  pointer-events: none;
+}
+.final-corner-tl { top: 13px; left: 13px; border-top: 2px solid rgba(201, 162, 74, 0.65); border-left: 2px solid rgba(201, 162, 74, 0.65); border-top-left-radius: 16px; }
+.final-corner-tr { top: 13px; right: 13px; border-top: 2px solid rgba(201, 162, 74, 0.65); border-right: 2px solid rgba(201, 162, 74, 0.65); border-top-right-radius: 16px; }
+.final-corner-br { bottom: 13px; right: 13px; border-bottom: 2px solid rgba(201, 162, 74, 0.65); border-right: 2px solid rgba(201, 162, 74, 0.65); border-bottom-right-radius: 16px; }
+.final-corner-bl { bottom: 13px; left: 13px; border-bottom: 2px solid rgba(201, 162, 74, 0.65); border-left: 2px solid rgba(201, 162, 74, 0.65); border-bottom-left-radius: 16px; }
+
+/* Ornamental gold divider with a rotated diamond */
+.final-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.final-divider::before,
+.final-divider::after {
+  content: '';
+  height: 1px;
+  flex: 1;
+}
+.final-divider::before { background: linear-gradient(90deg, transparent, rgba(201, 162, 74, 0.65)); }
+.final-divider::after  { background: linear-gradient(90deg, rgba(201, 162, 74, 0.65), transparent); }
+.final-gem {
+  width: 7px;
+  height: 7px;
+  background: #d4af37;
+  transform: rotate(45deg);
+  box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.18);
+}
+
+/* Staggered rise-in for card content */
+.final-rise {
+  opacity: 0;
+  animation: finalRise 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+@keyframes finalRise {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .final-seal::before,
+  .final-sheen::after,
+  .final-rise { animation: none; }
+  .final-rise { opacity: 1; }
+}

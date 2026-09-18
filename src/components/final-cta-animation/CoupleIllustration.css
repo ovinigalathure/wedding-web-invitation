@@ -1,0 +1,25 @@
+/* src/components/final-cta-animation/CoupleIllustration.css */
+.couple-illustration {
+  display: block;
+  overflow: visible;
+}
+
+.couple-float {
+  animation: coupleBob 4s ease-in-out infinite;
+  transform-origin: center;
+}
+
+.halo-ring {
+  animation: haloSpin 30s linear infinite;
+  transform-origin: 100px 110px;
+}
+
+@keyframes coupleBob {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-4px); }
+}
+
+@keyframes haloSpin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}

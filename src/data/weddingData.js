@@ -104,6 +104,13 @@ const weddingData = {
 
   rsvpDeadline: '1st May 2027',
 
+  finalReminder: {
+    heading: "Don't Miss Our Special Day!",
+    message:
+      "Emma & James can't wait to celebrate with you. Join us for our special day — every moment means more with you there.",
+    buttonText: 'RSVP Now',
+  },
+
   contact: {
     email: 'emma.james.wedding@example.com',
     phone: '+94 77 123 4567',

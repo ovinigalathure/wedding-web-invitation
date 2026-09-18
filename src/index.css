@@ -263,6 +263,8 @@ body {
   animation: shineTop 4s linear infinite;
 }
 
+/* Final invitation moment — replaced by the End-of-Page RSVP popup (FinalCTAModal) */
+
 .gold-divider {
   position: relative;
   display: flex;

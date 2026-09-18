@@ -1,0 +1,18 @@
+/* src/components/final-cta-animation/FloatingHearts.css */
+.floating-heart {
+  position: absolute;
+  bottom: -10%;
+  font-size: 0.9rem;
+  color: #d4af37;
+  opacity: 0;
+  animation-name: heartRise;
+  animation-timing-function: ease-in;
+  animation-iteration-count: infinite;
+}
+
+@keyframes heartRise {
+  0%   { opacity: 0; transform: translateY(0) scale(0.6); }
+  15%  { opacity: 0.8; }
+  85%  { opacity: 0.4; }
+  100% { opacity: 0; transform: translateY(-140px) scale(1); }
+}
